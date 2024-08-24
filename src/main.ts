@@ -1,7 +1,12 @@
-import { Maze } from "./entity/Maze";
 
-export async function main(args: string[]) {
-	const fileName = args[0];
+export async function main(commandLineArgs: string[]) {
+	const fileName = commandLineArgs[0];
 	const currentDirectory = process.cwd();
-	Maze.create().loadImage(`${currentDirectory}/${fileName}`).solve().save("output.png");
+
+	console.log('Current directory:', currentDirectory);
+	console.log('File name:', fileName);
+
+	// Maze.create().loadImage(`${currentDirectory}/${fileName}`).solve().save("output.png");
+
+	console.log('Not implemented yet');
 }

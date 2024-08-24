@@ -1,18 +1,22 @@
 {
-  "name": "maze-path-finder",
+  "name": "richards-refined-renderer",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js"
+    "start": "tsc && node dist/index.js",
+    "dev": "nodemon -e ts  --exec \"npm run start img.png\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.16.0",
-    "@types/pngjs": "^6.0.1"
+    "@types/pngjs": "^6.0.1",
+    "@types/yargs": "^17.0.33"
   },
   "dependencies": {
-    "pngjs": "^7.0.0"
+    "nodemon": "^3.1.4",
+    "pngjs": "^7.0.0",
+    "yargs": "^17.7.2"
   }
 }
