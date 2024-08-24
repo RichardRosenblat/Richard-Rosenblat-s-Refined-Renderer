@@ -3,14 +3,14 @@ import { SolverMethodsEnum } from "../enums/solverMethods";
 import { getImageParser } from "../factories/imageParserFactory";
 import { getMazeSolver } from "../factories/mazeSolverFactory";
 import { IImageParser } from "../types/IImageParser";
-import { IMazeSolver } from "../types/IMazeSolver";
-import { Image } from "../types/image";
+import { IMazeSolver } from "../types/IFilterLibrary";
+import { ImageMatrix } from "../types/ImageMatrix";
 
 export class Maze {
 	private solver: IMazeSolver;
 	private parser: IImageParser;
-	private image?: Image;
-	private solvedImage?: Image;
+	private image?: ImageMatrix;
+	private solvedImage?: ImageMatrix;
 	private fileName?: string;
 
 	constructor(reader: IImageParser, solver: IMazeSolver) {
@@ -19,7 +19,7 @@ export class Maze {
 	}
 
 	public static create(forFormat?: ImageFormatsEnum, method?: SolverMethodsEnum): Maze {
-		const reader = getImageParser(forFormat || ImageFormatsEnum.PNG);
+		const reader = getImageParser(forFormat || ImageFormatsEnum.PNG_JS);
 		const solver = getMazeSolver(method || SolverMethodsEnum["BINARY-TREE-LEFT"]);
 		return new Maze(reader, solver);
 	}

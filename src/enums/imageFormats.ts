@@ -1,3 +1,3 @@
 export enum ImageFormatsEnum {
-	PNG = "PNG",
+	PNG_JS = "PNG_JS",
 }

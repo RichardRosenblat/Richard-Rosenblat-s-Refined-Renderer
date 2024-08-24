@@ -1,15 +1,15 @@
 import { PNG } from "pngjs";
 import fs from "fs";
 import { IImageParser } from "../../types/IImageParser";
-import { Image, Pixel } from "../../types/image";
+import { ImageMatrix, Pixel } from "../../types/ImageMatrix";
 
-export class PngImageParser implements IImageParser {
-	public parse(fileName: string): Image {
-		const mazeBuffer = fs.readFileSync(fileName);
-		return this.getImagePixels(mazeBuffer);
+export class PngJsParser implements IImageParser {
+	public parse(fileName: string): ImageMatrix {
+		const imageBuffer = fs.readFileSync(fileName);
+		return this.getImagePixels(imageBuffer);
 	}
 
-	public save(fileName: string, image: Image): void {
+	public save(fileName: string, image: ImageMatrix): void {
 		const png = new PNG({ width: image[0].length, height: image.length });
 
 		this.fillPNGBuffer(png, image);
@@ -18,7 +18,7 @@ export class PngImageParser implements IImageParser {
 		fs.writeFileSync(fileName, buffer);
 	}
 
-	private fillPNGBuffer(png: PNG, image: Image): void {
+	private fillPNGBuffer(png: PNG, image: ImageMatrix): void {
 		for (let y = 0; y < png.height; y++) {
 			for (let x = 0; x < png.width; x++) {
 				const [r, g, b, a] = image[y][x];
@@ -31,7 +31,7 @@ export class PngImageParser implements IImageParser {
 		}
 	}
 
-	private getImagePixels(buffer: Buffer): Image {
+	private getImagePixels(buffer: Buffer): ImageMatrix {
 		const png = PNG.sync.read(buffer);
 		const data = png.data;
 		const pixels: Pixel[][] = [];
