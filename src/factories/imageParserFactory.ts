@@ -1,9 +1,13 @@
 import { PngJsParser } from "../entity/ImageParsers/PngImageParser";
-import { ImageFormatsEnum } from "../enums/imageFormats";
+import { ImageParsersEnum } from "../enums/imageFormats";
 import { IImageParser } from "../types/IImageParser";
 
-export function getImageParser(format: ImageFormatsEnum): IImageParser {
-	switch (format) {
+/**
+ * Factory function to get the image parser based on the format
+ * @param parser Image format
+ */
+export function getImageParser(parser: ImageParsersEnum): IImageParser {
+	switch (parser) {
 		case "PNG_JS":
 			return new PngJsParser();
 		default:

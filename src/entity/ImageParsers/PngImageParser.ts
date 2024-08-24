@@ -3,6 +3,9 @@ import fs from "fs";
 import { IImageParser } from "../../types/IImageParser";
 import { ImageMatrix, Pixel } from "../../types/ImageMatrix";
 
+/**
+ * Image parser for PNG images using pngjs library
+ */
 export class PngJsParser implements IImageParser {
 	public parse(fileName: string): ImageMatrix {
 		const imageBuffer = fs.readFileSync(fileName);
