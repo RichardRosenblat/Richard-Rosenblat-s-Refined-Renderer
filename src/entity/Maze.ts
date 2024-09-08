@@ -1,5 +1,5 @@
 import { ImageParsersEnum } from "../enums/imageFormats";
-import { SolverMethodsEnum } from "../enums/solverMethods";
+import { FilterLibrariesEnum } from "../enums/filterLibraries";
 import { getImageParser } from "../factories/imageParserFactory";
 import { getMazeSolver } from "../factories/mazeSolverFactory";
 import { IImageParser } from "../types/IImageParser";
@@ -18,9 +18,9 @@ export class Maze {
 		this.solver = solver;
 	}
 
-	public static create(forFormat?: ImageParsersEnum, method?: SolverMethodsEnum): Maze {
+	public static create(forFormat?: ImageParsersEnum, method?: FilterLibrariesEnum): Maze {
 		const reader = getImageParser(forFormat || ImageParsersEnum.PNG_JS);
-		const solver = getMazeSolver(method || SolverMethodsEnum["BINARY-TREE-LEFT"]);
+		const solver = getMazeSolver(method || FilterLibrariesEnum["V1"]);
 		return new Maze(reader, solver);
 	}
 

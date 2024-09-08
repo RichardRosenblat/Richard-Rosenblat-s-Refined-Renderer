@@ -5,6 +5,11 @@
  * It defines a single method that takes an ImageData object and returns a new ImageData object.
  */
 export interface IFilter {
+    /**
+     * Apply the filter to the image data.
+     * @param imageData Image data to be filtered
+     * @returns Filtered image data
+     * */
     applyFilter(imageData: ImageData): ImageData;
 }
 

@@ -5,6 +5,7 @@ import { IImageParser } from "../types/IImageParser";
 /**
  * Factory function to get the image parser based on the format
  * @param parser Image format
+ * @returns Image parser object
  */
 export function getImageParser(parser: ImageParsersEnum): IImageParser {
 	switch (parser) {
