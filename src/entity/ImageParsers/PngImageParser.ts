@@ -7,11 +7,22 @@ import { ImageMatrix, Pixel } from "../../types/ImageMatrix";
  * Image parser for PNG images using pngjs library
  */
 export class PngJsParser implements IImageParser {
+
+	/**
+	 * Parses PNG image file
+	 * @param fileName - file name
+	 * @returns image matrix
+	 */
 	public parse(fileName: string): ImageMatrix {
 		const imageBuffer = fs.readFileSync(fileName);
 		return this.getImagePixels(imageBuffer);
 	}
 
+	/**
+	 * Saves image matrix to PNG file
+	 * @param fileName - file name
+	 * @param image - image matrix
+	 */
 	public save(fileName: string, image: ImageMatrix): void {
 		const png = new PNG({ width: image[0].length, height: image.length });
 
@@ -21,6 +32,13 @@ export class PngJsParser implements IImageParser {
 		fs.writeFileSync(fileName, buffer);
 	}
 
+	/**
+	 * Fills PNG buffer with image matrix data
+	 * @private
+	 * @param png - PNG object
+	 * @param image - image matrix
+	 * @returns void
+	 * */
 	private fillPNGBuffer(png: PNG, image: ImageMatrix): void {
 		for (let y = 0; y < png.height; y++) {
 			for (let x = 0; x < png.width; x++) {
@@ -34,6 +52,12 @@ export class PngJsParser implements IImageParser {
 		}
 	}
 
+	/**
+	 * Gets image pixels from buffer
+	 * @private
+	 * @param buffer - image buffer
+	 * @returns image matrix
+	 */
 	private getImagePixels(buffer: Buffer): ImageMatrix {
 		const png = PNG.sync.read(buffer);
 		const data = png.data;
