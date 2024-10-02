@@ -1,16 +1,18 @@
+import { ImageMatrix } from "./ImageMatrix";
+
 /**
  * Interface for a filter
  * A filter is responsible for applying a transformation to an image.
  * It can be used to apply effects like blurring, sharpening, etc.
- * It defines a single method that takes an ImageData object and returns a new ImageData object.
+ * It defines a single method that takes an image matrix and returns a filtered image matrix.
  */
 export interface IFilter {
 	/**
-	 * Apply the filter to the image data.
-	 * @param imageData Image data to be filtered
-	 * @returns Filtered image data
+	 * Apply the filter to the image matrix
+	 * @param imageMatrix Image matrix to be filtered
+	 * @returns Filtered image matrix
 	 * */
-	applyFilter(imageData: ImageData): ImageData;
+	applyFilter(imageMatrix: ImageMatrix): ImageMatrix;
 }
 
 /**

@@ -1,22 +1,21 @@
 import { IFilter } from "../../types/IFilterLibrary";
+import { ImageMatrix } from "../../types/ImageMatrix";
 
 /**
  * A filter that converts an image to grayscale.
  */
 export class GrayScaleFilter implements IFilter {
     /**
-     * Apply the filter to the image data.
-     * @param imageData Image data to be filtered
-     * @returns Filtered image data
+     * Apply the grayscale filter to the image matrix
+     * @param imageMatrix Image matrix to be filtered
+     * @returns Filtered image matrix
      * */
-    applyFilter(imageData: ImageData): ImageData {
-        const data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-            const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-            data[i] = avg;
-            data[i + 1] = avg;
-            data[i + 2] = avg;
-        }
-        return imageData;
+    applyFilter(imageMatrix: ImageMatrix): ImageMatrix {
+        return imageMatrix.map(row =>
+            row.map(([r, g, b, a]) => {
+                const avg = (0.299 * r) + (0.587 * g) + (0.114 * b)
+                return [avg, avg, avg, a];
+            })
+        );
     }
 }
