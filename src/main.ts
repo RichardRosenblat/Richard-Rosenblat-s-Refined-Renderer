@@ -8,5 +8,7 @@ export async function main(commandLineArgs: string[]) {
 
 	// Maze.create().loadImage(`${currentDirectory}/${fileName}`).solve().save("output.png");
 
+	
+
 	console.log('Not implemented yet');
 }

@@ -7,11 +7,11 @@ import { IImageParser } from "../types/IImageParser";
 import { ImageMatrix } from "../types/ImageMatrix";
 
 /**
- * Class representing an image
+ * Class representing an image renderer that can load, process and save images.
  * An image is a 2D matrix of pixels.
  * It can be loaded from a file, processed using filters and saved back to a file.
  * */
-export class Image {
+export class RefinedRenderer {
 	private filters: IFilterLibrary;
 	private parser: IImageParser;
 	private image?: ImageMatrix;
@@ -76,10 +76,10 @@ export class Image {
 	 * @param method Filter library version
 	 * @returns Image object
 	 * */
-	public static create(forFormat?: ImageParsersEnum, method?: FilterLibrariesEnum): Image {
+	public static create(forFormat?: ImageParsersEnum, method?: FilterLibrariesEnum): RefinedRenderer {
 		const parser = getImageParser(forFormat || ImageParsersEnum.PNG_JS);
 		const filters = getFilterLibrary(method || FilterLibrariesEnum["V1"]);
-		return new Image(parser, filters);
+		return new RefinedRenderer(parser, filters);
 	}
 
 	/**
@@ -87,7 +87,7 @@ export class Image {
 	 * @param fileName File name
 	 * @returns Image object
 	 * */
-	public loadImage(fileName: string): Image {
+	public loadImage(fileName: string): RefinedRenderer {
 		this.fileName = fileName;
 		this.image = this.parser.parse(fileName);
 		return this;
@@ -98,7 +98,7 @@ export class Image {
 	 * @param filterName Filter name
 	 * @returns Image
 	 * */
-	public applyFilter(filterName: string): Image {
+	public applyFilter(filterName: string): RefinedRenderer {
 		if (!this.image) throw new Error("No image loaded");
 		if (!this.filters[filterName]) throw new Error("Invalid filter name");
 		this.filteredImage = this.filters[filterName].applyFilter(this.filteredImage || this.image);
